@@ -5,14 +5,14 @@ const validateId = async (req, res, next) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    res.status(400).send({ error: "Id inválido!" });
+    res.status(400).send({ error: "Invalid ID" });
     return;
   }
 
   try {
     const team = await Teams.findById(id);
     if (!team) {
-      return res.status(404).send({ msg: "Time não encontrado" });
+      return res.status(404).send({ msg: "Team has not been found" });
     }
     res.team = team; // respondendo ao servidor com o personagem que foi validado
   } catch (err) {

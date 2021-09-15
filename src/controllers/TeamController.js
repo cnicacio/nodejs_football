@@ -4,7 +4,7 @@ const getAll = async (req, res) => {
   try {
     const teams = await Teams.find(); // promise
     if (teams.length === 0) {
-      return res.status(404).send({ message: "Não existem times cadastrados" });
+      return res.status(404).send({ message: "There is no team registered" });
     }
     return res.send({ teams });
   } catch (err) {
@@ -18,7 +18,7 @@ const getById = async (req, res) => {
   try {
     const character = await Teams.findById(id);
     if (!character) {
-      res.status(404).json({ message: "Time não encontrado" });
+      res.status(404).json({ message: "Team has not been found" });
       return;
     }
   } catch (err) {
@@ -32,7 +32,7 @@ const create = async (req, res) => {
   if (!name || !foundationYear || !country || !league || !image) {
     res
       .status(400)
-      .send({ message: "Você não enviou todos os dados corretamente" });
+      .send({ message: "Make sure you have sent all of the data correctly and try again" });
     return;
   }
 
@@ -48,7 +48,7 @@ const create = async (req, res) => {
     await newTeam.save();
     return res
       .status(201)
-      .send({ message: "Time criado com sucesso", newTeam });
+      .send({ message: "Team successfully created", newTeam });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
@@ -60,7 +60,7 @@ const update = async (req, res) => {
   if (!name || !foundationYear || !country || !league || !image) {
     res
       .status(400)
-      .send({ message: "Você não enviou todos os dados corretamente" });
+      .send({ message: "Make sure you have sent all of the data correctly and try again" });
     return;
   }
 
@@ -72,7 +72,7 @@ const update = async (req, res) => {
 
   try {
     await res.team.save();
-    res.send({ message: "Time alterado com sucesso" });
+    res.send({ message: "Team successfully updated" });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
@@ -81,7 +81,7 @@ const update = async (req, res) => {
 const del = async (req, res) => {
   try {
     await res.team.remove();
-    return res.send({ message: "Time removido com sucesso" });
+    return res.send({ message: "Team successfully removed" });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
@@ -91,7 +91,7 @@ const filterByName = async (req, res) => {
   const name = req.query.name;
 
   if (!name) {
-    res.status(400).send({ error: "Time não encontrado!" });
+    res.status(400).send({ error: "Name has not been found" });
     return;
   }
 
@@ -107,7 +107,7 @@ const filterByCountry = async (req, res) => {
   const country = req.query.country;
 
   if (!country) {
-    res.status(400).send({ error: "País não encontrado!" });
+    res.status(400).send({ error: "Country has not been found" });
     return;
   }
 
@@ -123,7 +123,7 @@ const filterByLeague = async (req, res) => {
   const league = req.query.league;
 
   if (!league) {
-    res.status(400).send({ error: "País não encontrado!" });
+    res.status(400).send({ error: "League has not been found" });
     return;
   }
 
@@ -146,7 +146,7 @@ const filterAll = async (req, res) => {
     });
 
     if (teams.length === 0) {
-      return res.status(404).send({ error: "Time não encontrado" });
+      return res.status(404).send({ error: "Team has not been found" });
     }
     return res.send({ teams });
   } catch (err) {
@@ -164,4 +164,4 @@ module.exports = {
   filterByCountry,
   filterByLeague,
   filterAll,
-};
+}
