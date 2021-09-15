@@ -13,14 +13,15 @@ const getAll = async (req, res) => {
 };
 
 const getById = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
 
   try {
-    const character = await Teams.findById(id);
-    if (!character) {
+    const team = await Teams.findById(id);
+    if (!team) {
       res.status(404).json({ message: "Team has not been found" });
       return;
     }
+    return res.send({ team });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
