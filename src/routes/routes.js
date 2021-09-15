@@ -4,6 +4,7 @@ const router = express.Router();
 const TeamController = require("../controllers/TeamController");
 const TeamMiddleware = require("../middlewares/TeamsMiddlewares");
 
+router.get("/", TeamController.home);
 router.get("/teams", TeamController.getAll);
 router.get("/teams/:id", TeamMiddleware.validateId, TeamController.getById);
 router.post("/teams", TeamController.create);

@@ -1,5 +1,9 @@
 const Teams = require("../models/Teams");
 
+const home = async (req, res) => {
+  res.send({ info: "Welcome to the Football API" });
+}
+
 const getAll = async (req, res) => {
   try {
     const teams = await Teams.find(); // promise
@@ -156,6 +160,7 @@ const filterAll = async (req, res) => {
 };
 
 module.exports = {
+  home,
   getAll,
   getById,
   create,
