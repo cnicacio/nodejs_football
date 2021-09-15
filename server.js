@@ -1,8 +1,10 @@
 require("dotenv").config();
 const express = require("express");
+require("express-async-errors");
 var cors = require("cors");
 const connectToDb = require("./src/database/database");
 const router = require("./src/routes/routes");
+
 
 connectToDb();
 
